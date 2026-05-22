@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Bootcamp — Vente Socratique</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- VARIABLES & RESET --- */
+        :root {
+            --bg-dark: #0A0A0A;
+            --bg-card: #121212;
+            --gold: #D4AF37;
+            --gold-light: #F3E5AB;
+            --gold-gradient: linear-gradient(135deg, #B38728 0%, #FBF5B7 50%, #DAA520 100%);
+            --text-light: #F5F5F5;
+            --text-muted: #A0A0A0;
+            --border: rgba(212, 175, 55, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- TYPOGRAPHIE --- */
+        h1, h2, h3 {
+            font-family: 'Cinzel', serif;
+            letter-spacing: 2px;
+        }
+
+        .gold-text {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        /* --- HEADER & LOGO --- */
+        header {
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            height: 60px;
+            object-fit: contain;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 4rem 2rem;
+            position: relative;
+            background: radial-gradient(circle at center, #1a150b 0%, var(--bg-dark) 70%);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .hero .promise {
+            font-size: 1.2rem;
+            border: 1px solid var(--gold);
+            padding: 0.75rem 2rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            background: rgba(214, 175, 55, 0.05);
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        /* --- SECTION STRUCTURE --- */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 4rem;
+            position: relative;
+            text-transform: uppercase;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 2px;
+            background: var(--gold-gradient);
+            margin: 1rem auto 0;
+        }
+
+        /* --- GALERIE CONCEPT --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            aspect-ratio: 4/5;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: none;
+            transition: transform 0.5s ease, filter 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+            filter: grayscale(0%) sepia(0%);
+        }
+
+        /* --- PROGRAMME (TIMELINE) --- */
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+            top: 0;
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            margin-bottom: 4rem;
+            position: relative;
+            width: 50%;
+            padding: 0 3rem;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            text-align: left;
+        }
+
+        .timeline-badge {
+            position: absolute;
+            top: 5px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--gold-gradient);
+            box-shadow: 0 0 10px var(--gold);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-badge {
+            right: -8px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-badge {
+            left: -8px;
+        }
+
+        .time-slot {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--gold);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .timeline-content {
+            background: var(--bg-card);
+            padding: 2rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+        }
+
+        .timeline-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .timeline-content p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* --- OFFRES & INCLUSIONS --- */
+        .grid-services {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .service-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 3rem;
+            border-radius: 6px;
+        }
+
+        .service-box.featured {
+            border: 1px solid var(--gold);
+            position: relative;
+            background: linear-gradient(145deg, #121212 0%, #1a150b 100%);
+        }
+
+        .service-box h3 {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1rem;
+        }
+
+        .service-list {
+            list-style: none;
+        }
+
+        .service-list li {
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .service-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        .service-box.featured .service-list li::before {
+            content: '★';
+        }
+
+        /* --- FOOTER INFORMATIONS --- */
+        footer {
+            background: #050505;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .info-note {
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .hero .subtitle { font-size: 1.1rem; }
+            
+            .timeline::before { left: 20px; }
+            .timeline-item { width: 100%; text-align: left !important; padding-left: 50px; padding-right: 0; }
+            .timeline-item:nth-child(even) { left: 0; }
+            .timeline-item:nth-child(odd) .timeline-badge, .timeline-item:nth-child(even) .timeline-badge { left: 12px; }
+            
+            .grid-services { grid-template-columns: 1fr; gap: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Entête avec Logo -->
+    <header>
+        <img src="logo.png" alt="Logo" class="logo">
+    </header>
+
+    <!-- Section Principale / Promesse -->
+    <main>
+        <section class="hero">
+            <h1 class="gold-text">Sales Bootcamp</h1>
+            <p class="subtitle">Le séminaire d'excellence conçu exclusivement pour transformer l'alignement, la posture et les performances de toute une équipe commerciale.</p>
+            <div class="promise">Méthode fondamentale : Vente Socratique</div>
+        </section>
+
+        <!-- Galerie Visuelle Intermédiaire -->
+        <section style="padding-top: 0; padding-bottom: 2rem;">
+            <div class="gallery-grid">
+                <div class="gallery-item"><img src="image2.png" alt="Bootcamp Session"></div>
+                <div class="gallery-item"><img src="image3.png" alt="Executive Strategy"></div>
+                <div class="gallery-item"><img src="image4.png" alt="High Stakes Sales"></div>
+                <div class="gallery-item"><img src="image5.png" alt="Mastery Workshop"></div>
+                <div class="gallery-item"><img src="image6.png" alt="Closing Performance"></div>
+            </div>
+        </section>
+
+        <!-- Le Programme Détaillé -->
+        <section id="programme">
+            <h2 class="section-title">Le Programme de la Journée</h2>
+            <div class="timeline">
+                
+                <!-- 08:00 - 10:00 -->
+                <div class="timeline-item">
+                    <div class="timeline-badge"></div>
+                    <div class="timeline-content">
+                        <span class="time-slot">08h00 - 10h00</span>
+                        <h3>Psychologie de la vente</h3>
+                        <p>Immersion dans les leviers décisionnels irrationnels de l'acheteur. Décryptage des biais cognitifs majeurs, cartographie des déclencheurs d'achat émotionnels et recalibrage de la posture mentale du commercial pour passer de vendeur à conseiller stratégique de confiance.</p>
+                    </div>
+                </div>
+
+                <!-- 10:00 - 12:00 -->
+                <div class="timeline-item">
+                    <div class="timeline-badge"></div>
+                    <div class="timeline-content">
+                        <span class="time-slot">10h00 - 12h00</span>
+                        <h3>Les 10 étapes de la vente</h3>
+                        <p>Étude chirurgicale de l'architecture d'un cycle de vente parfait. De l'art de l'ancrage initial jusqu'aux mécaniques socratiques d'une découverte profonde, les équipes décortiqueront chaque étape clé pour verrouiller la valeur avant d'aborder le prix.</p>
+                    </div>
+                </div>
+
+                <!-- 12:00 - 13:30 -->
+                <div class="timeline-item">
+                    <div class="timeline-badge"></div>
+                    <div class="timeline-content">
+                        <span class="time-slot">12h00 - 13h30</span>
+                        <h3>Déjeuner</h3>
+                        <p>Pause d'échange informel autour d'un repas gastronomique inclus. Un moment privilégié pour débriefer les premiers concepts théoriques et renforcer la cohésion d'équipe.</p>
+                    </div>
+                </div>
+
+                <!-- 13:30 - 16:30 -->
+                <div class="timeline-item">
+                    <div class="timeline-badge"></div>
+                    <div class="timeline-content">
+                        <span class="time-slot">13h30 - 16h30</span>
+                        <h3>Mise en pratiques</h3>
+                        <p>Atelier intensif de simulations à haute intensité. Vos commerciaux s'affrontent sur des cas réels à travers des jeux de rôle complexes. Application immédiate de la maïeutique socratique (l'art de faire accoucher le client de son propre besoin par le questionnement).</p>
+                    </div>
+                </div>
+
+                <!-- 16:30 - 17:00 -->
+                <div class="timeline-item">
+                    <div class="timeline-badge"></div>
+                    <div class="timeline-content">
+                        <span class="time-slot">16h30 - 17h00</span>
+                        <h3>Break</h3>
+                        <p>Temps de décompression, de debriefing rapide et de rafraîchissement pour restaurer l'attention avant la phase stratégique finale.</p>
+                    </div>
+                </div>
+
+                <!-- 17:00 - 19:00 -->
+                <div class="timeline-item">
+                    <div class="timeline-badge"></div>
+                    <div class="timeline-content">
+                        <span class="time-slot">17h00 - 19h00</span>
+                        <h3>Étude de cas particulier</h3>
+                        <p>Analyse sur-mesure des comptes bloqués ou des objections les plus complexes rencontrés par votre entreprise sur le terrain. Résolution collaborative et écriture de scripts spécifiques basés sur vos offres réelles.</p>
+                    </div>
+                </div>
+
+                <!-- 19:00 - 20:00 -->
+                <div class="timeline-item">
+                    <div class="timeline-badge"></div>
+                    <div class="timeline-content">
+                        <span class="time-slot">19h00 - 20h00</span>
+                        <h3>Dîner</h3>
+                        <p>Repas offert par licorne à l'ensemble des participants pour célébrer les avancées stratégiques de la journée et relâcher la pression avant l'exercice de clôture.</p>
+                    </div>
+                </div>
+
+                <!-- 20:00 - 21:00 -->
+                <div class="timeline-item">
+                    <div class="timeline-badge"></div>
+                    <div class="timeline-content">
+                        <span class="time-slot">20h00 - 21h00</span>
+                        <h3>Défi brise peur du rejet</h3>
+                        <p>Un protocole d'impact psychologique fort inspiré des méthodes d'immersion émotionnelle de Tony Robbins ("Bas le masque"). Exercices de rupture de pattern conçus pour immuniser définitivement vos commerciaux contre la peur du "Non" et libérer leur audace de closing.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Ce qui est inclus & offert -->
+        <section id="details">
+            <div class="grid-services">
+                
+                <div class="service-box">
+                    <h3 class="gold-text">Inclus</h3>
+                    <ul class="service-list">
+                        <li><strong>Un déjeuner complet</strong> — Conçu pour recharger l'énergie de l'équipe.</li>
+                        <li><strong>Support pédagogique imprimé</strong> — Un classeur méthodologique haut de gamme réutilisable au quotidien.</li>
+                        <li><strong>Suivi d'intégration J+30</strong> — Session collective d'évaluation des applications terrain.</li>
+                        <li><strong>Remise à niveau J+120</strong> — Session de calibrage pour pérenniser les habitudes de vente.</li>
+                        <li><strong>Eau & rafraîchissements</strong> — À disposition tout au long du séminaire.</li>
+                    </ul>
+                </div>
+
+                <div class="service-box featured">
+                    <h3 class="gold-text">Privilège Offert</h3>
+                    <ul class="service-list">
+                        <li><strong>Dîner</strong> — Une expérience de fin de journée offerte par Licorne pour l'ensemble des collaborateurs afin de clore l'expérience en immersion totale.</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Pied de page informatif pur -->
+    <footer>
+        <p class="info-note">Investissement : 650.ooo mga par personne </p>
+    </footer>
+
+    <script>
+        // Animation subtile d'apparition au défilement (Scroll Reveal)
+        document.addEventListener('DOMContentLoaded', () => {
+            const items = document.querySelectorAll('.timeline-content, .service-box');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            items.forEach(item => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(20px)';
+                item.style.transition = 'all 0.6s ease-out';
+                observer.observe(item);
+            });
+        });
+    </script>
+</body>
+</html>
